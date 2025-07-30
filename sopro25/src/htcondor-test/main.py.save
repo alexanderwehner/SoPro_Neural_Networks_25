@@ -1,0 +1,65 @@
+import torch 
+import torchvision
+import torch.nn as nn
+from torchvision import transforms
+from torch.utils.data import DataLoader
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+def main()
+# load train and test set
+# 
+fashion_trainset = torchvision.datasets.FashionMNIST('data/', train=True, download=True, transform=transforms.ToTensor())
+fashion_testset = torchvision.datasets.FashionMNIST('data/', train=False, download=True, transform=transforms.ToTensor())
+
+# get train and test loader
+fashion_train_loader = torch.utils.data.DataLoader(dataset=fashion_trainset, batch_size=64, shuffle=True)
+fashion_test_loader = torch.utils.data.DataLoader(dataset=fashion_testset, batch_size=64, shuffle=False)
+
+# Create your baseline network class.
+
+class BaseNetwork(nn.Module):
+    def __init__(self):
+        super(BaseNetwork, self).__init__()
+        # Define layers
+        self.flatten = nn.Flatten()  # flatten 28x28 input
+        self.layer1 = nn.Linear(784, 64)  # hidden layer 1
+        self.relu1 = nn.ReLU()         # ReLU
+        self.layer2 = nn.Linear(64, 32)  # hidden layer 2
+        self.relu2 = nn.ReLU()         # ReLU
+        self.layer3 = nn.Linear(32, 10)  # output layer (output dim = 10 classes)
+
+    def forward(self, x):
+        x = self.flatten(x)  
+        x = self.layer1(x)
+        x = self.relu1(x)
+        x = self.layer2(x)
+        x = self.relu2(x)
+        x = self.layer3(x)
+        return x
+
+
+
+#TODO Train and optimize your baseline model. Report the test accuracy and mean test loss after each epoch
+
+def train_and_evaluate(model, train_loader, test_loader, epochs=5, learning_rate=0.001):
+    # loss function and optimizer
+    criterion = nn.CrossEntropyLoss()
+    optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+    
+    # storage for test accuracies
+    test_accuracies = []
+    
+    # train/eval loop
+    for epoch in range(epochs):
+        # training
+        model.train()
+        for batch in train_loader:
+            images, labels = batch
+            # f
+
+if __name__ == "__main__":
+
+    # run something
+    main()

@@ -1,0 +1,16 @@
+# HTCondor submit description file
+# Everything with a leading # is a comment
+
+universe                = docker
+docker_image            = docker.lsv.uni-saarland.de/awehner/dockerimage_sopro25:v1
+initialdir              = /nethome/awehner
+executable              = projects/sopro25/scripts/run.sh
+transfer_executable     = false
+output                  = /data/users/awehner/logs/sopro25/logfiles/run.sh.$(ClusterId).$(Year)_$(Month)_$(Day)_$(SUBMIT_TIME).out
+error                   = /data/users/awehner/logs/sopro25/logfiles/run.sh.$(ClusterId).$(Year)_$(Month)_$(Day)_$(SUBMIT_TIME).err
+log                     = /data/users/awehner/logs/sopro25/logfiles/run.sh.$(ClusterId).$(Year)_$(Month)_$(Day)_$(SUBMIT_TIME).log
+request_CPUs            = 1
+request_memory          = 10G
+request_GPUs            = 1
+requirements            = (GPUs_GlobalMemoryMb >= 16000) && (machine == "cl17lx.lsv.uni-saarland.de")
+queue 1
