@@ -7,7 +7,9 @@ Prerequisites:
 	- very basic knowledge of how to use the Linux command line (necessary to connect to (using ssh) and work on the cluster nodes, which run on Ubuntu) 
 		(I will walk you through the basics as good as I can)
 	
-	- a copy of the project files for the cluster that I put here: [LINK HERE]
+	- a copy of the project folder for the cluster that I put here (in this repository you are currently looking at):
+
+		https://github.com/alexanderwehner/SoPro_Neural_Networks_25 
 	
 	- LSV account, working and password changed from master to your own password
 	
@@ -316,7 +318,7 @@ This guide should just serve as a springboard into the workflow of HTCondor and 
 
 If you don't want the hassle, just tell me when to pull your code from the repo and run it on the cluster, if you want me to test it for you.
 
-I have uploaded the files for this on a separate GitHub repository for now (link above), so that you can clone/pull or download it more easily to test it, but I will integrate it into the GitLab repo soon(ish).
+I have uploaded the files for this to a GitHub repository for now (link above), so that you can clone/pull or download it more easily to test it, but I will integrate it into the GitLab repo soon(ish).
 
 Also, if you have the time and nerves to spare, you should check out the other README files in the sopro25 project folder. They come from the LSV HTCondor documentation, written by Marius Mosbach, which goes a bit more into detail regarding HTCondor itself, what commands to use and how to handle it in use. 
 
@@ -325,4 +327,3 @@ If you find any errors in this document or something does not work as expected, 
 Alex
 
 PS: Also please do me the favour of keeping a separate list of all dependencies you use, so that I can keep the docker image up to date more easily. Thanks!
-		
