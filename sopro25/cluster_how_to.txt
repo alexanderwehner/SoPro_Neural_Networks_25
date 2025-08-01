@@ -1,5 +1,7 @@
 How to get LSV clusters running - Step by Step Guide
 
+by Alexander Wehner
+
 Prerequisites: 
 	- OS: any Linux distribution, or alternatively WSL (Windows Subsystem for Linux) if you're currently on Windows (how to WSL: https://learn.microsoft.com/en-us/windows/wsl/install )
 		(ssh should also be working out of the box on the Windows command line, but I don't know if there are any intricacies with that and if it will work just as good as on Linux)
@@ -25,7 +27,6 @@ Disclaimer:
 	I tried to go into great detail on each step, explaining the commands you need and how to use them, even for the most basic commands. 
 	If you already are using Linux and have some experience working with the Linux terminal, much of this guide will feel redundant and overly detailed.
 	I made this decision because I wanted to make sure that everyone can not just reproduce but also understand what they are doing, even if they have no Linux experience.
-	(And because I remember having asked about operating systems and being told that we have 2 or 3 persons on Windows in the group.)
 	
 	This guide is the compiled documentation of my work setting up the project files for the cluster and HTCondor infrastructure, as straightforward as possible, as detailed as needed.
 	The LSV Wiki's guide on HTCondor and the README files in /sopro25 as well as /sopro25/submit-files, which were written by Marius Mosbach, provide some more insight in how to use HTCondor.
@@ -101,7 +102,7 @@ Your home registry (' /~ ') will be /nethome/[yourUsername], so we will put all 
 	
 	
 
-1. Download the sopro25 project folder from here: LINK HERE
+1. Download the sopro25 project folder from here: https://github.com/alexanderwehner/SoPro_Neural_Networks_25
 
 
 
@@ -292,7 +293,8 @@ Whats next?
 
 	- Managing dependencies
 	
-	Installing new dependencies requires building and pushing a new dockerimage.
+	Installing new dependencies (the way I have set it up here) requires building and pushing a new dockerimage each time you update the dependency list in the dockerfile.
+	Just update the Dockerfile and repeat step 7.
 	In the Dockerfile, lines 32 and below contain the dependencies that are currently in the image we're using.
 	Just add whatever you need here in the same format as the ones already there, and docker will install and build them into the image.
 	In the case that you choose to use a new image name, the submission file 'run.sub' needs to be updated with the correct docker image name (line 5, parameter 'docker_image')
@@ -305,25 +307,19 @@ Whats next?
 	(line 14, under #run code; currently this specifies my example task 'mnist.py')
 	
 	
-	- Adapting the submitfile to request code execution on similar hardware as the one outlined in the Averitec shared task documents
+	- Adapting the submitfile to request code execution on specific hardware specs.
 	
 	At the moment, the submitfile is set up in a way that requests a specific cluster compute node and some specific hardware specs.
-	We will need to change this to more closely match the hardware outlined in the shared task (or something comparable).
+	Lines 12-15 of the submitfile will need to be updated to specify what exact hardware specs are needed for the job at hand.
 	
 	
-	
-Lastly, depending on your willingness to deal with this system or not, I can always take on the job of running code and managing dependencies for the project, as I have spent some time getting into it now and have set up everything on my machine and on my cluster account.
 
 This guide should just serve as a springboard into the workflow of HTCondor and the LSV cluster for you, if you want to get into it yourself. 
 
-If you don't want the hassle, just tell me when to pull your code from the repo and run it on the cluster, if you want me to test it for you.
+Also, if you have the time and nerves to spare, you should check out the other README files in the sopro25 project folder. They come from the LSV HTCondor documentation, written by Marius Mosbach, which goes a bit more into detail regarding HTCondor itself, what commands to use and how to handle it in use.
 
-I have uploaded the files for this to a GitHub repository for now (link above), so that you can clone/pull or download it more easily to test it, but I will integrate it into the GitLab repo soon(ish).
-
-Also, if you have the time and nerves to spare, you should check out the other README files in the sopro25 project folder. They come from the LSV HTCondor documentation, written by Marius Mosbach, which goes a bit more into detail regarding HTCondor itself, what commands to use and how to handle it in use. 
+The project files I used and modified for my own setup are also based on Mr. Mosbach's HTCondor documentation (currently the official working LSV cluster documentation).
 
 If you find any errors in this document or something does not work as expected, please let me know as soon as possible.
 
 Alex
-
-PS: Also please do me the favour of keeping a separate list of all dependencies you use, so that I can keep the docker image up to date more easily. Thanks!
